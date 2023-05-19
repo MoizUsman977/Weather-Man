@@ -32,4 +32,4 @@ def get_average_temperature(folder_path, year, month):
         print("Lowest Average:", str(averageMinTemp) + "C")    
         print("Average Humidity:", str(averageHumidity) + "%")  
     except:
-        print("Add Correct Arguments or press -h for more info")    
+        print("Either File is not available or Path is not correct. \t Press -h for more info")    

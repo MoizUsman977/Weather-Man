@@ -48,4 +48,4 @@ def get_highest_temperature(folder_path, year):
         print("Lowest:", minTemp,"C on", min_temp_formatted_date)    
         print("Humid:", maxHumidity,"% on", humidity_formatted_date)
     except:
-        print("Add Correct Arguments or press -h for more info")
+        print("Either File is not available or Path is not correct. \t Press -h for more info")    

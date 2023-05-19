@@ -23,4 +23,4 @@ def get_max_min_temp_bar_chart_horizontally(folder_path, year, month):
             print(Fore.WHITE + " " + str(value["min_temp"]) + "C - " + str(value["max_temp"]) + "C")    
             print("\t")    
     except:
-         print("Add Correct Arguments or press -h for more info")
+        print("Either File is not available or Path is not correct. \t Press -h for more info")    
