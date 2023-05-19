@@ -23,7 +23,7 @@ if args.bar_chart:
 if args.bar_chart_in_line:
     year = args.bar_chart_in_line
 
-try:   
+try:
     if not args.year :
         date_obj = datetime.strptime(year, "%Y/%m")
         month_name = date_obj.strftime("%b")
@@ -31,13 +31,14 @@ try:
 except:
     print("Format of Date Should be yyyy/mm or yyyy")
 else:
-    if args.year:
+    if len(str(args.year)) == 4:
         MaxTemperatureYearly.get_highest_temperature(args.folder_path, args.year)
-    elif args.year_month: 
-        AverageTemperatureMonthly.get_average_temperature(args.folder_path, year, month_name)
-    elif args.bar_chart: 
-        BarChartsForMaxMinTempMonthly.get_max_min_temp_bar_chart(args.folder_path, year, month_name)
-    elif args.bar_chart_in_line: 
-        BarChartsForMaxMinTempInOneLine.get_max_min_temp_bar_chart_horizontally(args.folder_path, year, month_name)
     else:
+        print("This Argument recieves date in yyyy format")
+    if args.year_month: 
+        AverageTemperatureMonthly.get_average_temperature(args.folder_path, year, month_name)
+    if args.bar_chart: 
+        BarChartsForMaxMinTempMonthly.get_max_min_temp_bar_chart(args.folder_path, year, month_name)
+    if args.bar_chart_in_line: 
+        BarChartsForMaxMinTempInOneLine.get_max_min_temp_bar_chart_horizontally(args.folder_path, year, month_name)
         print("Enter Argument correctly or press -h for More Inforamtion")
