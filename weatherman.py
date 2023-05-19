@@ -1,9 +1,9 @@
-import argparse
-import MaxTemperatureYearly
-import AverageTemperatureMonthly
-import BarChartsForMaxMinTempMonthly
-import BarChartsForMaxMinTempInOneLine
+from averagetemperaturemonthly import get_average_temperature
+from barcharts import bar_chart
 from datetime import datetime
+from horizontalbarcharts import horizontal_bar_chart
+from maxtemperatureyearly import get_highest_temperature
+import argparse
 
 parser = argparse.ArgumentParser(description='Weather Man')
 parser.add_argument('folder_path', help='Path to the folder containing weather data files')
@@ -22,7 +22,6 @@ if args.bar_chart:
     year = args.bar_chart
 if args.bar_chart_in_line:
     year = args.bar_chart_in_line
-
 try:
     if not args.year :
         date_obj = datetime.strptime(year, "%Y/%m")
@@ -31,14 +30,11 @@ try:
 except:
     print("Format of Date Should be yyyy/mm or yyyy")
 else:
-    if len(str(args.year)) == 4:
-        MaxTemperatureYearly.get_highest_temperature(args.folder_path, args.year)
-    else:
-        print("This Argument recieves date in yyyy format")
+    if args.year and len(str(args.year)) == 4:
+        get_highest_temperature(args.folder_path, args.year)
     if args.year_month: 
-        AverageTemperatureMonthly.get_average_temperature(args.folder_path, year, month_name)
+        get_average_temperature(args.folder_path, year, month_name)
     if args.bar_chart: 
-        BarChartsForMaxMinTempMonthly.get_max_min_temp_bar_chart(args.folder_path, year, month_name)
+        bar_chart(args.folder_path, year, month_name)
     if args.bar_chart_in_line: 
-        BarChartsForMaxMinTempInOneLine.get_max_min_temp_bar_chart_horizontally(args.folder_path, year, month_name)
-        print("Enter Argument correctly or press -h for More Inforamtion")
+        horizontal_bar_chart(args.folder_path, year, month_name)

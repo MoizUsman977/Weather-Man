@@ -1,13 +1,12 @@
-import glob
 from datetime import datetime
+import glob
 
 def get_highest_temperature(folder_path, year):
-
     file_pattern= folder_path + '_' + str(year) +'_*.txt'
-
+    print(file_pattern)
     all_rows = []
-    file_list = glob.glob(folder_path + "/" + file_pattern)
     try:
+        file_list = glob.glob(folder_path + "/" + file_pattern)
         for file_path in file_list:
             with open(file_path, 'r') as file:
                 data = file.readlines()
@@ -24,7 +23,6 @@ def get_highest_temperature(folder_path, year):
             data["max_temperature"].append(row[1])
             data["low_temperature"].append(row[3])
             data["max_humidity"].append(row[7])
-
         filtereMaxTemp = [int(value) for value in data["max_temperature"] if value]
         maxTemp = max(filtereMaxTemp)
         max_temp_unformatted_date = data["date"][data["max_temperature"].index(str(maxTemp))]
@@ -43,9 +41,10 @@ def get_highest_temperature(folder_path, year):
         humidity_unformatted_Date = datetime.strptime(humidity_unformatted_Date, '%Y-%m-%d')
         humidity_formatted_date = humidity_unformatted_Date.strftime('%B %d')
 
-
         print("Highest:", maxTemp,"C on", max_temp_formatted_date)    
         print("Lowest:", minTemp,"C on", min_temp_formatted_date)    
         print("Humid:", maxHumidity,"% on", humidity_formatted_date)
-    except:
-        print("Either File is not available or Path is not correct. \t Press -h for more info")    
+    except FileNotFoundError:
+        print("Either File is not available or Path is not correct.")
+    except KeyError:
+        print("Something with your keys in data is wrong")
